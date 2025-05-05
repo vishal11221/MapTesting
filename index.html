@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Book Open Card</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
     .book-container {
@@ -76,7 +77,6 @@
   <div class="book-container" id="bookContainer" style="display: none;">
     <div class="book" id="book">
       <div class="page left"></div>
-      <!-- <div class="page right">RIGHT PAGE</div> -->
       <div class="content-inside">
         <h5>London</h5>
         <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a metropolitan area of over 13 million inhabitants. Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
@@ -86,33 +86,30 @@
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
 <script>
-   const map = L.map('map').setView([51.505, -0.09], 13);
-   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+ const map = L.map('map').setView([51.505, -0.09], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
 
-    map.on('click', () => {
-      const container = document.getElementById('bookContainer');
-      const book = document.getElementById('book');
-    
-      const isOpen = book.classList.contains('open');
-    
-      if (isOpen) {
-        book.classList.remove('open');
-        setTimeout(() => {
-          container.style.display = 'none';
-        }, 300);
-      } else {
-        container.style.display = 'block';
-        setTimeout(() => {
-          book.classList.add('open');
-        }, 50);
-      }
-    });
+map.on('click', () => {
+  const container = document.getElementById('bookContainer');
+  const book = document.getElementById('book');
+
+  const isOpen = book.classList.contains('open');
+
+  if (isOpen) {
+    book.classList.remove('open');
+    setTimeout(() => {
+      container.style.display = 'none';
+    }, 300);
+  } else {
+    container.style.display = 'block';
+    setTimeout(() => {
+      book.classList.add('open');
+    }, 50);
+  }
+});
 </script>
-
 </body>
 </html>
